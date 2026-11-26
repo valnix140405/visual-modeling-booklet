@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Booklet Visual Modeling UPY</title>
+  <meta name="description" content="Una historia de Mérida contada con las fuentes de los 9 equipos de Visual Modeling UPY.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<main class="booklet">
+  <header class="portada">
+    <span class="rotulo">Visual Modeling · UPY · Título de trabajo</span>
+    <h1>Mérida a ras de calle</h1>
+    <p class="pregunta">¿Para quién está creciendo Mérida? Quién gana y quién paga cuando la ciudad crece.</p>
+    <p class="datos">Booklet integrado de los 9 equipos · Versión en construcción</p>
+  </header>
+
+  <section>
+    <p class="rotulo-bloque">Capítulos</p>
+    <ol class="indice" id="indice"></ol>
+    <p class="solo-web" style="margin-top:20px"><a href="booklet.html">Leer el booklet completo en una sola página →</a></p>
+  </section>
+</main>
+
+<script type="module">
+  import { CAPITULOS } from "./js/capitulos.js";
+  const lista = document.getElementById("indice");
+  for (const c of CAPITULOS) {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = c.archivo;
+    const acto = document.createElement("span");
+    acto.className = "acto";
+    acto.textContent = c.acto;
+    const titulo = document.createElement("span");
+    titulo.className = "titulo";
+    titulo.textContent = c.titulo;
+    const equipo = document.createElement("span");
+    equipo.className = "equipo";
+    equipo.textContent = c.equipo;
+    titulo.append(equipo);
+    a.append(acto, titulo);
+    li.append(a);
+    lista.append(li);
+  }
+</script>
+</body>
+</html>

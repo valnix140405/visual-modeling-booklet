@@ -1,0 +1,257 @@
+/* ==========================================================================
+   Booklet Visual Modeling UPY · estilo común
+   Base visual: sitio del Equipo 2 («Del Mundo a la Esquina»).
+   Todos los capítulos usan estas clases; no se definen colores ni fuentes
+   fuera de este archivo.
+   ========================================================================== */
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Color con significado fijo en todo el libro */
+  --morado: #600d8b;          /* foco: lo que el capítulo analiza */
+  --morado-claro: #8b1da8;
+  --morado-suave: rgba(96, 13, 139, 0.06);
+  --oro: #ed9f22;             /* comparación: contra qué se compara */
+  --oro-oscuro: #b45309;      /* texto o anotación en color cálido */
+  --oro-suave: rgba(237, 159, 34, 0.10);
+  --gris: #555555;            /* contexto: ejes, notas, resto de series */
+  --gris-claro: #9ca3af;
+  --tinta: #0d0d0d;           /* títulos y cuerpo */
+  --borde: #e5e7eb;           /* rejillas y separadores */
+  --fondo: #f8f9fa;           /* página */
+  --blanco: #ffffff;          /* fondo de gráficas */
+
+  /* Tipografía */
+  --fuente: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Medidas */
+  --ancho-texto: 860px;
+  --radio: 14px;
+  --sombra: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--fuente);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--morado); }
+
+.booklet {
+  max-width: var(--ancho-texto);
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+}
+
+/* ---------- Portada e índice ---------- */
+.portada {
+  padding: 48px 0 32px;
+  border-bottom: 4px solid var(--morado);
+  margin-bottom: 32px;
+}
+.portada .rotulo { margin-bottom: 12px; }
+.portada h1 {
+  font-size: clamp(34px, 6vw, 56px);
+  line-height: 1.05;
+  font-weight: 800;
+  color: var(--morado);
+  margin: 0 0 16px;
+}
+.portada .pregunta { font-size: 21px; color: var(--gris); margin: 0; max-width: 680px; }
+.portada .datos { margin-top: 24px; font-size: 14px; color: var(--gris); }
+
+.indice { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.indice a {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  text-decoration: none;
+  color: var(--tinta);
+}
+.indice a:hover { border-color: var(--morado); }
+.indice .acto { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--oro-oscuro); }
+.indice .titulo { font-weight: 600; }
+.indice .equipo { display: block; font-size: 13px; color: var(--gris); font-weight: 400; }
+
+/* ---------- Capítulo (plantilla común) ---------- */
+.capitulo { padding: 24px 0 48px; }
+.capitulo + .capitulo { border-top: 1px solid var(--borde); }
+
+/* 1. Rótulo: CAPÍTULO 0X · TEMA */
+.rotulo {
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--oro-oscuro);
+}
+
+/* 2. Título-hallazgo */
+.titulo-hallazgo {
+  font-size: clamp(28px, 4.4vw, 40px);
+  line-height: 1.1;
+  font-weight: 800;
+  margin: 8px 0 16px;
+}
+
+/* 3. Entrada */
+.entrada { font-size: 19px; color: #2b2b2b; margin: 0 0 24px; max-width: 760px; }
+
+/* Rótulo de bloque: [LA HISTORIA EN 10 SEGUNDOS], [LO QUE ESTOS DATOS NO DICEN] */
+.rotulo-bloque {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--morado);
+  margin: 0 0 10px;
+}
+.rotulo-bloque::before { content: "["; }
+.rotulo-bloque::after { content: "]"; }
+
+/* 4. La historia en 10 segundos: 3 cifras */
+.historia-10s { margin: 0 0 32px; }
+.cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.cifra {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-left: 5px solid var(--morado);
+  border-radius: var(--radio);
+  padding: 14px 16px;
+}
+.cifra.comparacion { border-left-color: var(--oro); }
+.cifra b { display: block; font-size: 34px; line-height: 1.1; font-weight: 800; }
+.cifra span { display: block; font-size: 14.5px; color: #333; margin-top: 4px; }
+.cifra small { display: block; font-size: 12px; color: var(--gris); margin-top: 6px; }
+
+/* 5. Ilustración de apertura (opcional) */
+.ilustracion { margin: 0 0 32px; }
+.ilustracion img { display: block; width: 100%; height: auto; border-radius: var(--radio); border: 1px solid var(--borde); }
+
+/* 6. Escena: una gráfica con su encabezado, lectura y pie */
+.escena {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 18px 20px 14px;
+  margin: 0 0 28px;
+}
+.escena-encabezado {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gris);
+  margin: 0 0 10px;
+}
+.grafica-titulo { font-size: 20px; line-height: 1.25; font-weight: 700; margin: 0 0 4px; }
+.grafica-subtitulo { font-size: 14.5px; color: var(--gris); margin: 0 0 12px; }
+.grafica svg { display: block; width: 100%; height: auto; overflow: visible; }
+.grafica-fuente { font-size: 12.5px; color: var(--gris); margin: 10px 0 0; }
+.lectura { font-size: 15.5px; margin: 12px 0 0; padding-top: 10px; border-top: 1px solid var(--borde); }
+.grafica-error {
+  font-size: 14px;
+  color: var(--oro-oscuro);
+  background: var(--oro-suave);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+/* 7. Lo que estos datos no dicen */
+.no-dicen {
+  background: var(--morado-suave);
+  border-radius: var(--radio);
+  padding: 16px 20px;
+  margin: 0 0 24px;
+}
+.no-dicen ul { margin: 0; padding-left: 20px; }
+.no-dicen li { margin: 4px 0; font-size: 15.5px; }
+
+/* 8. Puente al siguiente capítulo */
+.puente {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--morado);
+  border-left: 3px solid var(--oro);
+  padding-left: 14px;
+  margin: 24px 0 0;
+}
+
+/* Aviso de datos simulados (regla 3 de la guía) */
+.simulado {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  color: var(--gris);
+  border: 1.5px dashed var(--gris);
+  border-radius: 6px;
+  padding: 1px 6px;
+  vertical-align: middle;
+}
+
+/* ---------- Clases dentro del SVG de D3 ---------- */
+.grafica text { font-family: var(--fuente); fill: var(--tinta); }
+.grafica .eje text { font-size: 12.5px; fill: var(--gris); }
+.grafica .eje line, .grafica .eje path { stroke: var(--borde); }
+.grafica .eje-y-categorias text { font-size: 13px; fill: var(--tinta); }
+.grafica .rejilla line { stroke: var(--borde); }
+.grafica .valor { font-size: 12.5px; font-weight: 600; fill: var(--tinta); font-family: var(--mono); }
+.grafica .etiqueta-serie { font-size: 13px; font-weight: 600; }
+.grafica .anotacion { font-size: 12.5px; fill: var(--oro-oscuro); font-weight: 600; }
+.grafica .referencia { stroke: var(--oro-oscuro); stroke-dasharray: 4 4; stroke-width: 1.25; }
+
+/* Cifras en tablas */
+table.datos { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.datos th, table.datos td { border-bottom: 1px solid var(--borde); padding: 6px 8px; text-align: left; }
+table.datos td.num { font-family: var(--mono); text-align: right; }
+
+.solo-impresion { display: none; }
+
+/* ---------- Pantallas chicas ---------- */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .escena { padding: 14px 12px 10px; }
+  .indice a { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* ---------- Impresión (booklet en PDF) ---------- */
+@page { size: letter; margin: 16mm 15mm 18mm; }
+
+@media print {
+  body { background: var(--blanco); font-size: 10.5pt; line-height: 1.45; }
+  .booklet { max-width: none; padding: 0; }
+  .solo-web { display: none !important; }
+  .solo-impresion { display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  .portada { min-height: 230mm; display: flex; flex-direction: column; justify-content: center; break-after: page; }
+  .capitulo { break-before: page; padding: 0; border: 0 !important; }
+  .titulo-hallazgo { font-size: 24pt; }
+  .entrada { font-size: 12pt; }
+  .cifra b { font-size: 20pt; }
+  .cifra span { font-size: 9.5pt; }
+  .cifra small, .grafica-fuente { font-size: 8pt; }
+  .grafica-titulo { font-size: 13pt; }
+  .grafica-subtitulo, .lectura, .no-dicen li { font-size: 9.5pt; }
+  .escena { box-shadow: none; break-inside: avoid; padding: 10px 12px; }
+  .historia-10s, .no-dicen, .ilustracion { break-inside: avoid; }
+  .grafica .eje text, .grafica .valor, .grafica .anotacion { font-size: 11px; }
+}

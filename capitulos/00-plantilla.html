@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plantilla de capítulo · Booklet Visual Modeling UPY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+<main class="booklet">
+
+  <!-- Para hacer tu capítulo: copia este archivo como capitulos/NN-equipo-XX.html,
+       cambia el contenido y conserva las clases. Todo lo que va dentro de
+       <article class="capitulo"> entra al booklet completo y al PDF.
+       Agrega tu capítulo a js/capitulos.js. -->
+
+  <p class="solo-capitulo solo-web"><a href="../index.html">← Índice del booklet</a></p>
+
+  <article class="capitulo" id="plantilla">
+
+    <!-- 1. Rótulo: capítulo y acto -->
+    <span class="rotulo">Capítulo de ejemplo · Acto 2 · Vivir aquí</span>
+
+    <!-- 2. Título-hallazgo: la conclusión con su número, no el tema -->
+    <h2 class="titulo-hallazgo">Mismo producto, otro pasillo: la cebolla cuesta 174 % más en el súper</h2>
+
+    <!-- 3. Entrada: la pregunta del capítulo y su respuesta corta, 2 o 3 frases -->
+    <p class="entrada">
+      En Mérida, lo que pagas en la caja depende de dónde compras. PROFECO registró el mismo producto,
+      con la misma presentación, en la Central de Abasto y en supermercados: en la mitad de los casos el
+      súper cobra al menos 19 % más.
+    </p>
+
+    <!-- 4. La historia en 10 segundos: 3 cifras con unidad y fuente.
+         Cada cifra debe salir de un archivo de data/ (revisión cruzada). -->
+    <section class="historia-10s">
+      <p class="rotulo-bloque">La historia en 10 segundos</p>
+      <div class="cifras">
+        <div class="cifra">
+          <b>+174.3 %</b>
+          <span>más cara la cebolla blanca en el súper que en la Central de Abasto</span>
+          <small>PROFECO QQP Mérida, mayo 2026</small>
+        </div>
+        <div class="cifra">
+          <b>+19.0 %</b>
+          <span>diferencia mediana en 139 productos comparables</span>
+          <small>PROFECO QQP Mérida, mayo 2026</small>
+        </div>
+        <div class="cifra comparacion">
+          <b>+57.1 %</b>
+          <span>subió la canasta alimentaria urbana por persona de enero 2018 a marzo 2025</span>
+          <small>CONEVAL, pesos corrientes</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Ilustración de apertura (opcional):
+    <figure class="ilustracion">
+      <img src="../img/equipo-02/cebolla.png" alt="Descripción de lo que muestra la ilustración">
+    </figure> -->
+
+    <!-- 6. Escenas: de 2 a 4 gráficas. Cada una declara su configuración en JSON.
+         Las rutas de datos van desde la raíz del repositorio. -->
+    <figure class="escena">
+      <p class="escena-encabezado">Escena 1: ¿Cuánto te llevas en el Abasto?</p>
+      <div class="grafica" data-grafica="barras">
+        <script type="application/json">
+          {
+            "csv": "data/equipo-02/comparables_por_canal.csv",
+            "filtro": { "canal_comparado": "Central de Abasto" },
+            "orden": { "columna": "diferencia_pct", "dir": "desc" },
+            "top": 10,
+            "etiqueta": "producto",
+            "valor": "diferencia_pct",
+            "formato": "pctSigno",
+            "foco": "Cebolla",
+            "referencia": { "tipo": "mediana", "texto": "Mediana de 139 productos" },
+            "titulo": "La cebolla blanca encabeza la lista: +174 % en el súper",
+            "subtitulo": "Diferencia de precio del supermercado frente a la Central de Abasto, misma presentación. Los 10 productos con mayor diferencia. Mérida, mayo 2026.",
+            "fuente": "Fuente: PROFECO, Quién es Quién en los Precios, Mérida (02-A y 02-B), medianas por producto · Corte: mayo 2026"
+          }
+        </script>
+      </div>
+      <p class="lectura">
+        La línea punteada es la mediana de los 139 productos. Las verduras y los granos a granel son los
+        que más se encarecen al pasar al súper.
+      </p>
+    </figure>
+
+    <figure class="escena">
+      <p class="escena-encabezado">Escena 2: Lo que cuesta comer, cada año</p>
+      <div class="grafica" data-grafica="linea">
+        <script type="application/json">
+          {
+            "csv": "data/equipo-02/coneval_lineas_pobreza.csv",
+            "x": "periodo",
+            "series": [
+              { "columna": "lpei_canasta_alimentaria_urbana_mxn", "nombre": "Canasta urbana", "rol": "foco" },
+              { "columna": "lpei_canasta_alimentaria_rural_mxn", "nombre": "Canasta rural", "rol": "contexto" }
+            ],
+            "formato": "pesosEnteros",
+            "titulo": "La canasta alimentaria urbana subió 57 % en siete años",
+            "subtitulo": "Valor mensual por persona de la canasta alimentaria de CONEVAL, en pesos corrientes, enero 2018 a marzo 2025. Es una línea nacional, no solo de Mérida.",
+            "fuente": "Fuente: CONEVAL, líneas de pobreza por ingresos (03-A) · Corte: marzo 2025"
+          }
+        </script>
+      </div>
+      <p class="lectura">
+        En marzo de 2025 alimentar a una persona en zona urbana costaba $2,379 al mes; en enero de 2018, $1,515.
+      </p>
+    </figure>
+
+    <!-- 7. Lo que estos datos no dicen: límites, huecos y supuestos -->
+    <aside class="no-dicen">
+      <p class="rotulo-bloque">Lo que estos datos no dicen</p>
+      <ul>
+        <li>Son precios de un solo levantamiento de PROFECO (mayo 2026): no muestran cómo cambian durante el año.</li>
+        <li>Solo se comparan productos con la misma presentación en los dos lugares.</li>
+        <li>No incluye lo que cuesta llegar a la Central de Abasto: tiempo y transporte.</li>
+        <li>La canasta de CONEVAL está en pesos corrientes: no descuenta la inflación.</li>
+      </ul>
+    </aside>
+
+    <!-- 8. Puente: una frase que abre el siguiente capítulo -->
+    <p class="puente">Si comer se lleva casi un mes de salario, ¿cómo se siente vivir aquí? El siguiente capítulo pregunta por la seguridad.</p>
+
+  </article>
+</main>
+
+<script type="module">
+  import { renderizar } from "../js/booklet.js";
+  renderizar();
+</script>
+</body>
+</html>
