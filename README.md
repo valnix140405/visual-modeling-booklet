@@ -1,5 +1,7 @@
 # Booklet Visual Modeling UPY
 
+**Sitio:** https://valnix140405.github.io/visual-modeling-booklet/ (se publica desde la rama `main` en cada push).
+
 Una sola historia de Mérida contada con las fuentes de los 9 equipos. Pregunta guía: **¿para quién está creciendo Mérida?** Se construye con D3 v7 y JavaScript sin frameworks, con el estilo base del Equipo 2. La versión web y el PDF salen del mismo código y de los mismos datos.
 
 Los lineamientos completos (historia común, plantilla de capítulo, estilo, reglas de datos y comentarios por equipo) están en la guía de storytelling del Data Visualization Team.
